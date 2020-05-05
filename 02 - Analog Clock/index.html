@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Analog Clock</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="clock">
+        <div class="tick hour-tick"></div>
+        <div class="tick min-tick"></div>
+        <div class="tick sec-tick"></div>
+      </div>
+      <div class="footer">
+        Made with <i class="fa-heart">❤️</i> by Sakhamen
+      </div>
+    </div>
+
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #7d5fff;
+        font-family: 'Arial';
+        text-align: center;
+        font-size: .625rem;
+      }
+
+      body {
+        display: flex;
+        flex: 1;
+        font-size: 2rem;
+        align-items: center;
+        min-height: 90vh;
+      }
+
+      .container {
+        border: 1.25rem solid #fff;
+        border-radius: 50%;
+        margin: 3.125rem auto;
+        position: relative;
+        padding: 2rem;
+        height: 30rem;
+        width: 30rem;
+        box-shadow:
+          0 0 0 4px  rgba(0, 0, 0, 0.1)
+          inset 0 0 0 3px #efefef,
+          inset 0 0 .625rem #000,
+          0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .clock {
+        position: relative;
+        transform: translateY(-3px); /* account for the height of clock tick */
+        height: 100%;
+        width: 100%;
+      }
+
+      .tick {
+        position: absolute;
+        background: #000;
+        top: 50%;
+        height: 6px;
+        width: 50%;
+        transform: rotate(90deg);
+        transform-origin: 100%;
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); /* clock effect */
+      }
+
+      .sec-tick {
+        height: 2px;
+      }
+
+      .footer {
+        margin-top: 5rem;
+        position: absolute;
+      }
+    </style>
+
+    <script type="text/javascript">
+      // selectors
+      const hourTick = document.querySelector('.hour-tick');
+      const minTick = document.querySelector('.min-tick');
+      const secondTick = document.querySelector('.sec-tick');
+
+      function setDate() {
+        const now = new Date();
+        const hour = now.getHours();
+        const mins = now.getMinutes();
+        const secs = now.getSeconds();
+        styleClock(getDegree(hour, 'hour'), getDegree(mins, 'min'), getDegree(secs, 'sec'));
+      }
+
+      function getDegree(value, type) {
+        const now = new Date();
+        const factor = (type === 'hour') ? 12 : 60;
+        const offset = 90; // offset value because of transform (90deg)
+
+        if (type === 'hour') return ((value / factor) * 360) + ((now.getMinutes() / 60) * 30) + offset;
+        if (type === 'min') return ((value / factor) * 360) + ((now.getSeconds() / 60) * 6) + offset;
+        if (type === 'sec') return ((value / factor) * 360) + offset;
+      }
+
+      function styleClock(hourDegree, minDegree, secondsDegree) {
+        hourTick.style.transform = `rotate(${hourDegree}deg)`;
+        minTick.style.transform = `rotate(${minDegree}deg)`;
+        secondTick.style.transform = `rotate(${secondsDegree}deg)`;
+      }
+
+      setInterval(setDate, 1000);
+      setDate();
+    </script>
+  </body>
+</html>
