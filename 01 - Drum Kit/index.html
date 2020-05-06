@@ -47,7 +47,7 @@
 				<span>tink</span>
 			</div>
 		</div>
-		
+
 		<audio data-key="65" src="sounds/clap.wav"></audio>
 		<audio data-key="83" src="sounds/hihat.wav"></audio>
 		<audio data-key="68" src="sounds/kick.wav"></audio>
@@ -57,28 +57,28 @@
 		<audio data-key="74" src="sounds/snare.wav"></audio>
 		<audio data-key="75" src="sounds/tom.wav"></audio>
 		<audio data-key="76" src="sounds/tink.wav"></audio>
-		
+
 		<footer>Made with <i class="fa-heart">❤️</i> by Sakhamen</footer>
-		
+
 		<script>
 			// listeners
 			window.addEventListener('keydown', playSound);
 			const keys = document.querySelectorAll('.key');
 			keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-			
+
 			function playSound(e) {
 				const _keyCode = e.keyCode;
 				const audio = document.querySelector(`audio[data-key="${_keyCode}"]`);
 				const key = document.querySelector(`.key[data-key="${_keyCode}"]`);
-				
+
 				if (!audio) return; // stop function
-				
+
 				audio.currentTime = 0;
 				audio.play();
-				
+
 				key.classList.add('playing'); // add css
 			}
-			
+
 			function removeTransition(e) {
 				if (e.propertyName !== "transform") return;
 				this.classList.remove('playing');

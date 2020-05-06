@@ -19,7 +19,7 @@
   </div>
 
   <img src="https://source.unsplash.com/uy8atyBKh3A/800x500">
-  
+
   <footer>Made with <i class="fa-heart">❤️</i> by Sakhamen</footer>
 
   <style>
@@ -29,11 +29,11 @@
 		--spacing: 10px;
 		--blur: 10px;
 	}
-	
+
 	* {
 		box-sizing: border-box;
 	}
-	
+
     body {
       text-align: center;
       background: #34495e;
@@ -42,7 +42,7 @@
       font-weight: 100;
       font-size: 3rem;
     }
-	
+
 	.baseColor {
 		color: var(--base);
 	}
@@ -54,13 +54,13 @@
     input {
       width: 6.25rem;
     }
-	
+
 	img {
 		padding: var(--spacing);
 		background: var(--base);
 		filter: blur(var(--blur));
 	}
-	
+
 	footer {
 	  padding: .625rem;
 	}
@@ -68,16 +68,16 @@
 
   <script>
 	const inputs = document.querySelectorAll("input");
-	
+
 	inputs.forEach(input => input.addEventListener('change', handleUpdate));
 	inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
-	
+
 	function handleUpdate(e) {
 		const suffix = this.dataset.sizing || '';
 		document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
 		e.stopPropagation();
 	}
-	
+
   </script>
 
 </body>
