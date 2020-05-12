@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+	
+	const p = document.querySelector('p');
+
+    // Regular
+	console.log('hello');
+
+    // Interpolated
+	console.log('Hello I am a %s string!', '');
+
+    // Styled
+	console.log('%c I am some great text', 'font-size: 3.125rem; background: grey;');
+
+    // warning!
+	console.log('Warning...');
+
+    // Error :|
+	console.error('error...');
+
+    // Info
+	console.info('info...');
+
+    // Testing
+	console.assert(1 === 2, 'Wrong equation!');
+
+    // clearing
+	// console.clear();
+
+    // Viewing DOM Elements
+	console.log(p);
+	//console.dir(p);
+	
+	//console.clear();
+	
+    // Grouping together
+	dogs.forEach(dog => {
+		// console.group(`${dog.name}`);
+		console.groupCollapsed(`${dog.name}`);
+		console.log(`This is ${dog.name}`);
+		console.log(`${dog.name} is ${dog.age} years old`);
+		console.log(`${dog.name} is ${dog.age * 7} dog years`);
+		console.groupEnd(`${dog.name}`);
+	});
+
+    // counting
+	console.count('Sarcamen');
+	console.count('Sarcamen');
+	console.count('Sarcamen');
+	console.count('Test');
+	console.count('Sarcamen');
+
+    // timing
+	let git_url = 'https://api.github.com/users/sakhamen';
+	console.time('fetching data');
+	fetch(git_url)
+	.then(data => data.json())
+	.then(data => {
+		console.timeEnd('fetching data');
+		console.log('results', data);
+	});
+	
+	// table
+	console.table(dogs);
+	
+	// if you want to see a list of console functions
+	console.dir(console)
+
+  </script>
+</body>
+</html>
